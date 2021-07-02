@@ -30,6 +30,7 @@ __kernel void pi(
    float x, accum = 0.0f;                              
    int i,istart,iend;                                      
    
+   // each work item will take care niters steps
    istart = (group_id * num_wrk_items + local_id) * niters;
    iend   = istart+niters;      
 

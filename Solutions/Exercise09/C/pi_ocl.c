@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 {
     float *h_psum;              // vector to hold partial sum
     int in_nsteps = INSTEPS;    // default number of steps (updated later to device preferable)
-    int niters = ITERS;         // number of iterations
+    int niters = ITERS;         // number of steps each work item to take care
     int nsteps;
     float step_size;
     size_t nwork_groups;
@@ -82,7 +82,7 @@ int main(int argc, char *argv[])
     cl_kernel        kernel_pi;     // compute kernel
 
     // Set up OpenCL context, queue, kernel, etc.
-    cl_uint deviceIndex = 0;
+    cl_uint deviceIndex = 1;
     parseArguments(argc, argv, &deviceIndex);
 
     // Get list of devices

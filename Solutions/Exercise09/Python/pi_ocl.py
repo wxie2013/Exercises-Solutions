@@ -52,8 +52,8 @@ step_size = 1.0 / float(nsteps)
 # vector to hold partial sum
 h_psum = numpy.empty(nwork_groups).astype(numpy.float32)
 
-print nwork_groups, "work groups of size", work_group_size, ".",
-print nsteps, "Integration steps"
+print( nwork_groups, "work groups of size", work_group_size, ".",)
+print( nsteps, "Integration steps")
 
 d_partial_sums = cl.Buffer(context, cl.mem_flags.WRITE_ONLY, h_psum.nbytes)
 
@@ -78,6 +78,6 @@ pi_res = h_psum.sum() * step_size
 
 # Stop the timer
 rtime = time() - rtime
-print "The calculation ran in", rtime, "seconds"
-print "pi =", pi_res, "for", nsteps, "steps"
+print( "The calculation ran in", rtime, "seconds")
+print( "pi =", pi_res, "for", nsteps, "steps")
 

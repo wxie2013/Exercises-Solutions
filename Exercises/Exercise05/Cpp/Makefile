@@ -11,11 +11,14 @@ INC = -I $(CPP_COMMON)
 
 LIBS = -lOpenCL -lrt
 
+INC_DIR = /usr/local/cuda/include
+LIB_DIR = /usr/local/cuda/lib64
+
 # Change this variable to specify the device type
 # to the OpenCL device type of choice. You can also
 # edit the variable in the source.
 ifndef DEVICE
-	DEVICE = CL_DEVICE_TYPE_DEFAULT
+	DEVICE = CL_DEVICE_TYPE_GPU
 endif
 
 # Check our platform and make sure we define the APPLE variable
@@ -30,7 +33,7 @@ endif
 CCFLAGS += -D DEVICE=$(DEVICE)
 
 vadd: vadd.cpp
-	$(CPPC) $^ $(INC) $(CCFLAGS) $(LIBS) -o $@
+	$(CPPC) $^ $(INC) $(CCFLAGS) -L $(LIB_DIR) $(LIBS) -I $(INC_DIR)  -o $@
 
 
 clean:

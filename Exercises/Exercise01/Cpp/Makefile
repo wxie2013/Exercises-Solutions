@@ -5,6 +5,10 @@ endif
 
 CPP_COMMON = ../../Cpp_common
 
+INC_DIR = /usr/local/cuda/include/CL
+LIB_DIR = /usr/local/cuda/lib64
+
+
 CCFLAGS=
 
 INC = -I $(CPP_COMMON)
@@ -20,7 +24,7 @@ ifeq ($(PLATFORM), Darwin)
 endif
 
 DeviceInfo: DeviceInfo.cpp
-	$(CPPC) $^ $(INC) $(CCFLAGS) $(LIBS) -o $@
+	$(CPPC) $^ $(INC) -I $(INC_DIR)  $(CCFLAGS) -L $(LIB_DIR) $(LIBS) -o $@
 
 
 clean:

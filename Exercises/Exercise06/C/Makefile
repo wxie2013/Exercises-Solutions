@@ -17,6 +17,11 @@ LIBS = -lm -lOpenCL -fopenmp
 
 COMMON_DIR = ../../C_common
 
+INC_DIR = /usr/local/cuda/include
+LIB_DIR = /usr/local/cuda/lib64
+
+
+
 MMUL_OBJS = wtime.o
 EXEC = mult
 
@@ -32,7 +37,7 @@ endif
 all: $(EXEC)
 
 mult: $(MMUL_OBJS) matmul.c matrix_lib.c
-	$(CC) $^ $(CCFLAGS) $(LIBS) -I $(COMMON_DIR) -o $(EXEC)
+	$(CC) $^ $(CCFLAGS) -L $(LIB_DIR) $(LIBS) $(LIBS) -I $(COMMON_DIR) -I $(INC_DIR) -o $(EXEC)
 
 wtime.o: $(COMMON_DIR)/wtime.c
 	$(CC) -c $^ $(CCFLAGS) -o $@

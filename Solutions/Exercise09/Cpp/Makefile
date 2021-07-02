@@ -11,6 +11,8 @@ INC = -I $(CPP_COMMON)
 
 LIBS = -lOpenCL -lrt
 
+INC_DIR = /usr/local/cuda/include
+LIB_DIR = /usr/local/cuda/lib64
 
 # Check our platform and make sure we define the APPLE variable
 # and set up the right compiler flags and libraries
@@ -22,7 +24,7 @@ ifeq ($(PLATFORM), Darwin)
 endif
 
 pi_ocl: pi_ocl.cpp
-	$(CPPC) $^ $(INC) $(CCFLAGS) $(LIBS) -o $@
+	$(CPPC) $^ $(INC) -I$(INC_DIR) $(CCFLAGS) -L $(LIB_DIR) $(LIBS)  $(LIBS) -o $@
 
 
 clean:

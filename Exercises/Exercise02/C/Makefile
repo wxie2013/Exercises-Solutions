@@ -3,6 +3,9 @@ ifndef CC
 	CC = gcc
 endif
 
+INC_DIR = /usr/local/cuda/include
+LIB_DIR = /usr/local/cuda/lib64
+
 CCFLAGS=-O3 -lm
 
 LIBS = -lOpenCL
@@ -13,7 +16,7 @@ COMMON_DIR = ../../C_common
 # to the OpenCL device type of choice. You can also
 # edit the variable in the source.
 ifndef DEVICE
-	DEVICE = CL_DEVICE_TYPE_DEFAULT
+	DEVICE = CL_DEVICE_TYPE_GPU
 endif
 
 # Check our platform and make sure we define the APPLE variable
@@ -26,7 +29,7 @@ endif
 CCFLAGS += -D DEVICE=$(DEVICE)
 
 vadd: vadd_c.c $(COMMON_DIR)/wtime.c $(COMMON_DIR)/device_info.c
-	$(CC) $^ $(CCFLAGS) $(LIBS) -I $(COMMON_DIR) -o $@
+	$(CC) $^ $(CCFLAGS) -L $(LIB_DIR) $(LIBS) -I $(COMMON_DIR) -I $(INC_DIR) -o $@
 
 
 clean:
